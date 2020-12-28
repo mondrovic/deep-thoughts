@@ -1,13 +1,12 @@
 import React from "react";
-// use query allows us to use apolloprovider created in app.js
+import ThoughtList from "../components/ThoughtList";
+
 import { useQuery } from "@apollo/react-hooks";
 import { QUERY_THOUGHTS } from "../utils/queries";
-import ThoughtList from "../components/ThoughtList";
 
 const Home = () => {
   const { loading, data } = useQuery(QUERY_THOUGHTS);
   const thoughts = data?.thoughts || [];
-  console.log(thoughts);
 
   return (
     <main>
