@@ -1,7 +1,15 @@
-const { gql } = require("apollo-server-express");
+const { gql } = require('apollo-server-express');
 
-// define queries
 const typeDefs = gql`
+  type User {
+    _id: ID
+    username: String
+    email: String
+    friendCount: Int
+    thoughts: [Thought]
+    friends: [User]
+  }
+
   type Thought {
     _id: ID
     thoughtText: String
@@ -18,13 +26,9 @@ const typeDefs = gql`
     username: String
   }
 
-  type User {
-    _id: ID
-    username: String
-    email: String
-    friendCount: Int
-    thoughts: [Thought]
-    friends: [User]
+  type Auth {
+    token: ID!
+    user: User
   }
 
   type Query {
@@ -41,11 +45,6 @@ const typeDefs = gql`
     addThought(thoughtText: String!): Thought
     addReaction(thoughtId: ID!, reactionBody: String!): Thought
     addFriend(friendId: ID!): User
-  }
-
-  type Auth {
-    token: ID!
-    user: User
   }
 `;
 
